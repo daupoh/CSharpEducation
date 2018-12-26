@@ -9,14 +9,38 @@
         ">
     <Window.Resources>
         <ControlTemplate x:Key="EnemyTemplate" TargetType="{x:Type ContentControl}">
-
-            <Ellipse 
-            Grid.Row="2" Grid.Column="2"
-            HorizontalAlignment="Center" Height="40" Stroke="Black" 
-                         VerticalAlignment="Top"  Width="40" Fill="#FFF04513"/>
+                         <Canvas Height="54" Canvas.Left="160" Canvas.Top="200" Width="56">
+            <Ellipse
+                    HorizontalAlignment="Center" Height="48" Stroke="Black" 
+                    VerticalAlignment="Top"  Width="40" Fill="#FFA09490" RenderTransformOrigin="-5.738,-2.5" Canvas.Left="8"/>
+            <Ellipse
+                    HorizontalAlignment="Center" Height="24" Stroke="Black" 
+                    VerticalAlignment="Top"  Width="14" Fill="#FF0F0E0E" RenderTransformOrigin="-5.738,-2.5" Canvas.Top="8">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="10"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse
+                    HorizontalAlignment="Center" Height="25" Stroke="Black" 
+                    VerticalAlignment="Top"  Width="15" Fill="#FF0F0E0E" RenderTransformOrigin="-5.738,-2.5" Canvas.Left="41" Canvas.Top="8">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-10"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            </Canvas>
         </ControlTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60*"/>
             <ColumnDefinition Width="300*"/>
@@ -39,7 +63,7 @@
             Grid.Column="1" 
                 Grid.Row="2" Height="20"/>
         <Canvas x:Name="playArea" 
-                Grid.Row="1" Grid.ColumnSpan="2" Margin="97,0,2,0">
+                Grid.Row="1" Grid.ColumnSpan="2" Margin="97,0,2,0" MouseMove="playArea_MouseMove">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -53,7 +77,7 @@
             <TextBlock x:Name="gameOverText" Canvas.Left="72" TextWrapping="Wrap" Text="Game Over" Canvas.Top="82" 
                        FontFamily="Arial Black" FontSize="60"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFC51F1F"/>
-            <Rectangle x:Name="target" Height="35" Canvas.Left="408" Stroke="Black" Canvas.Top="53" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Rectangle x:Name="target" Height="35" Canvas.Left="408" Stroke="Black" Canvas.Top="53" Width="35" RenderTransformOrigin="0.5,0.5" MouseEnter="target_MouseEnter">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -68,7 +92,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
-            </Rectangle>
+            </Rectangle>            
         </Canvas>
 
     </Grid>
