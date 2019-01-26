@@ -8,5 +8,6 @@ namespace CSharpEducation
 {
     interface IHidingPlace
     {
+
     }
 }
