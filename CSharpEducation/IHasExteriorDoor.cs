@@ -9,6 +9,6 @@ namespace CSharpEducation
     interface IHasExteriorDoor
     {
         string DoorDescription { get; }
-        ACLocation DoorLocation { get; }
+        ACLocation DoorLocation { get; set; }
     }
 }

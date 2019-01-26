@@ -8,15 +8,15 @@ namespace CSharpEducation
 {
     abstract class ACLocation
     {
-        protected string m_sName;
-        protected ACLocation[] m_apExits;
+        protected string m_sName=null;
+        protected ACLocation[] m_apExits=null;
 
         public string Name {
             get {
                return m_sName;               
             }
         }
-        ACLocation[] Exits {
+        public ACLocation[] Exits {
             get
             {
                 return m_apExits;
@@ -35,7 +35,7 @@ namespace CSharpEducation
                         description += ",";
                     }
                 }
-                description += ".";
+                description += ". ";
                 return description;
             }
         }
@@ -44,15 +44,36 @@ namespace CSharpEducation
         {
             checkName(name);
             m_sName = name;
+            m_apExits = new ACLocation[1];
            
         }
-        
+        bool isExitsEmpty
+        {
+            get
+            {
+                bool isIt = false;
+                if (m_apExits.Length==1 && m_apExits[0]==null)
+                {
+                    isIt = true;
+                }
+                return isIt;
+            }
+
+        }
         public void addExit(ACLocation newExit)
         {
-            checkExit(newExit);
-            int newSize = m_apExits.Length + 1;
-            resizeArrayOfExits(newSize);
-            m_apExits[newSize - 1] = newExit;
+            if (isExitsEmpty)
+            {
+                m_apExits[0] = newExit;
+            }
+            else
+            {
+                checkExit(newExit);
+                int newSize = 0;
+                newSize = m_apExits.Length + 1;
+                resizeArrayOfExits(newSize);
+                m_apExits[newSize - 1] = newExit;
+            }
         }
         public bool Equals(ACLocation loc)
         {
@@ -84,10 +105,12 @@ namespace CSharpEducation
         {
             ACLocation[] newExits = new ACLocation[newSize];
             uint index = 0;
-            foreach(ACLocation exit in m_apExits)
+
+            foreach (ACLocation exit in m_apExits)
             {
                 newExits[index++] = exit;
             }
+
             m_apExits = null;
             m_apExits = newExits;
         }
@@ -101,7 +124,7 @@ namespace CSharpEducation
         }
         private void checkExit(ACLocation exit)
         {
-            if (exit==null)
+            if (exit == null)
             {
                 throw new FormatException("Новый выход не может быть пустым объектом.");
             }
@@ -109,13 +132,15 @@ namespace CSharpEducation
             {
                 throw new FormatException("Рекурсия - локация имеет выход на саму себя.");
             }
-            foreach(ACLocation existExit in m_apExits)
+
+            foreach (ACLocation existExit in m_apExits)
             {
                 if (existExit.Equals(exit))
                 {
                     throw new FormatException("Выход уже существует и не может быть добавлен повторно.");
                 }
             }
+
         }
     }
 }

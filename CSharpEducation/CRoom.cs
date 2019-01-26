@@ -8,11 +8,21 @@ namespace CSharpEducation
 {
     class CRoom:ACLocation
     {
-        public CRoom(string name):base(name)
+        protected string m_sDecoration;
+
+        public CRoom(string name, string locationDecoration) :base(name)
         {
-           
+            m_sDecoration = locationDecoration;
+        }
+        public override string Description
+        {
+            get
+            {
+                string description = base.Description;
+                description += "Здесь вы видите: " + m_sDecoration + ". ";
+                return description;
+            }
         }
 
-        private string decoration;
     }
 }
